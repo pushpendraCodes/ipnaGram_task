@@ -69,7 +69,7 @@ const Employee = () => {
         setValue("email", data.employee.email);
         setValue("addresses", data.employee.addresses);
         setValue("mobile", data.employee.mobile);
-        setValue("department", data.department.name);
+        setValue("department", data.employee.department.name);
         setemployee(data.employee);
       }
     } catch (error) {
