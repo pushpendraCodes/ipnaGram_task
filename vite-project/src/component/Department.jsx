@@ -25,7 +25,13 @@ const Department = ({ item }) => {
 async function getEmployees (id){
     const apiUrl = import.meta.env.VITE_APP_API_URL;
     try {
-        let response = await fetch(`${apiUrl}/api/employee/getEmployeeDeptWise/${id}`);
+        let response = await fetch(`${apiUrl}/api/employee/getEmployeeDeptWise/${id}`,{
+
+          headers: {
+            "Content-Type": "application/json",
+            authorization: JSON.parse(localStorage.getItem("user")).token,
+          },
+        });
         let data = await response.json();
         console.log(data,"data")
         if (data.status) {

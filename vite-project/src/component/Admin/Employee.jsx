@@ -120,7 +120,7 @@ const Employee = () => {
           body: JSON.stringify(data),
           headers: {
             "Content-Type": "application/json",
-            // Add other headers if needed
+            authorization: JSON.parse(localStorage.getItem("user")).token,
           },
         }
       );
@@ -154,7 +154,16 @@ const Employee = () => {
   const [depts, setdept] = useState();
   async function getDepartment() {
     try {
-      let response = await fetch(`${apiUrl}/api/department/getAll`);
+      let response = await fetch(`${apiUrl}/api/department/getAll`,
+
+      {
+        headers: {
+          "Content-Type": "application/json",
+          authorization: JSON.parse(localStorage.getItem("user")).token,
+        },
+      }
+
+      );
       let data = await response.json();
       if (data.status) {
         console.log(data, "data");
@@ -168,7 +177,14 @@ const Employee = () => {
   async function getEmployee(id) {
     try {
       console.log(id, "id");
-      let response = await fetch(`${apiUrl}/api/employee/getEmployee/${id}`);
+      let response = await fetch(`${apiUrl}/api/employee/getEmployee/${id}`,
+
+      {
+        headers: {
+          "Content-Type": "application/json",
+          authorization: JSON.parse(localStorage.getItem("user")).token,
+        },
+      });
       let data = await response.json();
       console.log(data, "data1");
       if (data.status) {
@@ -201,7 +217,12 @@ const Employee = () => {
       }
 
       let response = await fetch(
-        `${apiUrl}/api/employee/getAllEmployees?${queryString}`
+        `${apiUrl}/api/employee/getAllEmployees?${queryString}`,{
+          headers: {
+            "Content-Type": "application/json",
+            authorization: JSON.parse(localStorage.getItem("user")).token,
+          },
+        }
       );
       let data = await response.json();
       console.log(data, "data");
@@ -220,7 +241,11 @@ const Employee = () => {
     try {
       console.log(id, "id");
       let response = await fetch(`${apiUrl}/api/employee/deleteEmployee/${id}` ,{
-        method:"DELETE"
+        method:"DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          authorization: JSON.parse(localStorage.getItem("user")).token,
+        },
       });
       let data = await response.json();
       console.log(data, "data1");

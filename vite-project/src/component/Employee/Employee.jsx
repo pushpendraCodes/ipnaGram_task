@@ -52,7 +52,15 @@ const Employee = () => {
   async function getEmployee(id) {
     try {
       console.log(id, "id");
-      let response = await fetch(`${apiUrl}/api/employee/getEmployee/${user}`);
+      let response = await fetch(`${apiUrl}/api/employee/getEmployee/${user}`,
+
+
+      {
+        headers: {
+          "Content-Type": "application/json",
+          authorization: JSON.parse(localStorage.getItem("user")).token,
+        },
+      });
       let data = await response.json();
       console.log(data, "data1");
       if (data.status) {

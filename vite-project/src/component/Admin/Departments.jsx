@@ -39,7 +39,15 @@ const Departments = () => {
 
   async function getDepartment() {
     try {
-      let response = await fetch(`${apiUrl}/api/department/getAll`);
+      let response = await fetch(`${apiUrl}/api/department/getAll`,
+      {
+        headers: {
+          "Content-Type": "application/json",
+          authorization: JSON.parse(localStorage.getItem("user")).token,
+        },
+      }
+
+      );
       let data = await response.json();
       if (data.status) {
         console.log(data, "data");
@@ -63,11 +71,13 @@ const Departments = () => {
           {
             method: "PUT",
             body: JSON.stringify({ name }),
-            headers: {
-              "Content-Type": "application/json",
-              // Add other headers if needed
-            },
-          }
+
+              headers: {
+                "Content-Type": "application/json",
+                authorization: JSON.parse(localStorage.getItem("user")).token,
+              },
+            }
+
         );
 
         let resdata = await response.json();
@@ -106,7 +116,7 @@ const Departments = () => {
           body: JSON.stringify(body),
           headers: {
             "Content-Type": "application/json",
-            // Add other headers if needed
+            authorization: JSON.parse(localStorage.getItem("user")).token,
           },
         });
 
@@ -148,7 +158,7 @@ const Departments = () => {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
-          // Add other headers if needed
+          authorization: JSON.parse(localStorage.getItem("user")).token,
         },
       });
       let data = await response.json();
@@ -191,7 +201,15 @@ const Departments = () => {
 
     try {
       let response = await fetch(
-        `${apiUrl}/api/employee/getEmployeeDeptWise/${id}`
+        `${apiUrl}/api/employee/getEmployeeDeptWise/${id}`,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            authorization: JSON.parse(localStorage.getItem("user")).token,
+          },
+        }
+
+
       );
       let data = await response.json();
       console.log(data, "data");

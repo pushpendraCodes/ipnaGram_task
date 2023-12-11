@@ -58,7 +58,7 @@ export default function Sidebar() {
           borderRadius="10px"
 
         >
-          <NavLink>Dashboard</NavLink>
+          Dashboard
         </ListItem>
 
         <div className="sidebar-hideshow">

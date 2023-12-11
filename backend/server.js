@@ -12,12 +12,13 @@ app.use(express.json());
 
 const authRoutes = require("./routes/authRoutes")
 const departmentsRoutes = require("./routes/departmentsRoutes")
-const EmployeeRoutes = require("./routes/employeeRoutes")
+const EmployeeRoutes = require("./routes/employeeRoutes");
+const verifyToken = require("./middileware/chekAuth");
 
-
-app.use("/api/user"  , authRoutes)
-app.use("/api/department"  , departmentsRoutes)
-app.use("/api/employee"  , EmployeeRoutes)
+app.use(express.static(path.resolve(__dirname, 'dist')));
+app.use("/api/user" , authRoutes)
+app.use("/api/department",verifyToken  , departmentsRoutes)
+app.use("/api/employee" ,verifyToken , EmployeeRoutes)
 
 app.get("/" ,(req,res)=>{
   res.send("hello node js")
